@@ -1,0 +1,22 @@
+default: &default
+  adapter: "postgresql"
+  encoding: "unicode"
+  database: "<%= ENV.fetch("POSTGRES_DB") { "app-imdb-clone" } %>"
+  username: "<%= ENV.fetch("POSTGRES_USER") { "app-imdb-clone" } %>"
+  password: "<%= ENV.fetch("POSTGRES_PASSWORD") { "password_app-imdb-clone" } %>"
+  host: "<%= ENV.fetch("POSTGRES_HOST") { "postgres" } %>"
+  port: "<%= ENV.fetch("POSTGRES_PORT") { 5432 } %>"
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: "<%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>"
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRES_DB") { "app-imdb-clone" } %>_development
+
+#test:
+#  <<: *default
+#  database: <%= ENV.fetch("POSTGRES_DB") { "app-imdb-clone" } %>_test
+
+#production:
+#  <<: *default
+#  database: <%= ENV.fetch("POSTGRES_DB") { "app-imdb-clone" } %>_production
