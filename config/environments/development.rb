@@ -77,4 +77,6 @@ Rails.application.configure do
   # Docker supports a bunch of ranges so let's just support everything. This
   # isn't insecure due to only running in development.
   config.web_console.allowed_ips = ["0.0.0.0/0"]
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 8000 }
 end
