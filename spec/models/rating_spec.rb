@@ -54,4 +54,11 @@ RSpec.describe Rating, type: :model do
       expect(r2.save).to eq(true)
     end
   end
+
+  context 'relation (relationships with other tables)' do
+    it 'belong_to' do
+      should belong_to :user
+      should belong_to :movie
+    end
+  end
 end

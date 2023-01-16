@@ -79,4 +79,10 @@ RSpec.describe Movie, type: :model do
       expect(Movie.not_rated_yet.count).to eq(3)
     end
   end
+
+  context 'relation (relationships with other tables)' do
+    it 'movie should have many ratings' do
+      should have_many :ratings
+    end
+  end
 end

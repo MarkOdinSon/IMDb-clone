@@ -64,7 +64,11 @@ group :development, :test do
 
   ### => Here are the gems that I will add gradually as needed <= ###
 
+  # [https://github.com/rspec/rspec-rails]
   gem 'rspec-rails', '~> 6.0.0'
+
+  # [https://github.com/thoughtbot/shoulda-matchers]
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
