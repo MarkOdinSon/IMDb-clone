@@ -31,4 +31,12 @@ class Movie < ApplicationRecord
 
     default: :Action
   }
+
+  # validations
+
+  validates :title, :text, :category, presence: true
+
+  validates :category, numericality: { only_integer: true, in: 0..25 }
+
+  validates :rating, numericality: { in: 0..10 }
 end
