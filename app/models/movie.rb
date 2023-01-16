@@ -1,6 +1,9 @@
 class Movie < ApplicationRecord
   has_many :ratings
 
+  scope :already_rated, -> { where.not(rating: 0) }
+  scope :not_rated_yet, -> { where(rating: 0) }
+
   enum category: {
     Action: 0,
     Adventure: 1,
@@ -29,12 +32,14 @@ class Movie < ApplicationRecord
     War: 24,
     Western: 25,
 
-    default: :Action
+    #default: :Action
   }
 
   # validations
 
-  validates :title, :text, :category, presence: true
+  validates_presence_of :title, :text, :category, :rating
+
+  validates :title, :text, presence: true
 
   validates :category, numericality: { only_integer: true, in: 0..25 }
 

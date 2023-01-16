@@ -61,6 +61,10 @@ group :development, :test do
 
   # Reduces boot times through caching; required in config/boot.rb
   gem "bootsnap", require: false
+
+  ### => Here are the gems that I will add gradually as needed <= ###
+
+  gem 'rspec-rails', '~> 6.0.0'
 end
 
 group :development do

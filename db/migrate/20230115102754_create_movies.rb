@@ -3,7 +3,7 @@ class CreateMovies < ActiveRecord::Migration[7.0]
     create_table :movies do |t|
       t.string :title, null: false
       t.string :text, null: false
-      t.integer :category, null: false #, default: 0
+      t.integer :category, null: false, default: 0
       t.float :rating, default: 0
 
       t.timestamps
