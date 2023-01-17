@@ -10,14 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_15_102854) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_17_103055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", primary_key: ["movie_id", "movie_category"], force: :cascade do |t|
+    t.bigint "movie_id", null: false
+    t.integer "movie_category", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_categories_on_movie_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "title", null: false
     t.string "text", null: false
-    t.integer "category", default: 0, null: false
     t.float "rating", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -45,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_15_102854) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "movies"
   add_foreign_key "ratings", "movies"
   add_foreign_key "ratings", "users"
 end

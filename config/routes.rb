@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  root to: "movies#index"
+
+  resources :movies
 
   get "/up/", to: "up#index", as: :up
   get "/up/databases", to: "up#databases", as: :up_databases
