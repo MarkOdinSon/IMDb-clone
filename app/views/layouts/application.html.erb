@@ -27,6 +27,14 @@
       <!--Here add header-->
     </header>
 
+    <!--Devise flash messages-->
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
     <main class="max-w-screen-lg mx-auto mb-auto">
       <%= yield %>
     </main>
