@@ -30,6 +30,7 @@ RSpec.describe Movie, type: :model do
       m1 = Movie.new(title: 'Some text', text: 'Some text', rating: 7.6)
       m2 = Movie.new(title: 'Some text2', text: 'Some text2', rating: -0.1)
       m3 = Movie.new(title: 'Some text3', text: 'Some text3', rating: 10.1)
+
       expect(m1.save).to eq(true)
       expect(m2.save).to eq(false)
       expect(m3.save).to eq(false)
