@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: "movies#index"
 
-  resources :movies
+  resources :movies, only: :show
+
+  namespace :admin do
+    resources :movies, except: %i[index show]
+  end
 
   get "/up/", to: "up#index", as: :up
   get "/up/databases", to: "up#databases", as: :up_databases
