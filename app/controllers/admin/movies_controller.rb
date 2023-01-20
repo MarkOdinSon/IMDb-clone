@@ -63,6 +63,6 @@ class Admin::MoviesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:movie).permit(:title, :text)
+    params.require(:movie).permit(:title, :text, category_ids: [])
   end
 end
