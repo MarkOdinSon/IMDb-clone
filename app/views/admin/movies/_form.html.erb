@@ -1,3 +1,7 @@
+<!--https://slimselectjs.com/install#cdn-->
+<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+<link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+
 <%= form_with(model: movie, url: this_url) do |form| %>
   <% if movie.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -15,17 +19,28 @@
     <%= form.text_field :title, required: true, class: "bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
   </div>
 
-  <div class="my-5">
+  <div class="">
     <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <%= form.text_area :text, required: true, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
+  <div class="">
     <%= form.label :category_ids %>
-    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true} %>
+    <!--https://slimselectjs.com/install#cdn-->
+    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategories', class: 'text-lg'} %>
   </div>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
+
+<!--https://slimselectjs.com/install#cdn-->
+<script>
+    new SlimSelect({
+        select: '#selectCategories',
+        settings: {
+            allowDeselect: true
+        }
+    })
+</script>
