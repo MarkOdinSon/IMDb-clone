@@ -3,7 +3,7 @@ class Admin::MoviesController < ApplicationController
 
   def new
     authorize :movie, :new?
-    render flash: 'Hi, Admin. Let`s add a new movie!'
+    flash[:notice] = 'Hi, Admin. Let`s add a new movie!'
   end
 
   def create
@@ -14,7 +14,7 @@ class Admin::MoviesController < ApplicationController
 
   def edit
     authorize :movie, :edit
-    render flash: 'Hi, Admin. Here you can edit an existing movie!'
+    flash[:notice] = 'Hi, Admin. Here you can edit an existing movie!'
   end
 
   def update
