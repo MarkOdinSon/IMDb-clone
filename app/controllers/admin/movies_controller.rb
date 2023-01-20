@@ -4,12 +4,24 @@ class Admin::MoviesController < ApplicationController
   def new
     authorize :movie, :new?
     flash[:notice] = 'Hi, Admin. Let`s add a new movie!'
+
+    @movie = Movie.new
   end
 
   def create
-    authorize :movie, :craete?
+    authorize :movie, :create?
 
+    @movie = Movie.new(post_params)
 
+    respond_to do |format|
+      if @movie.save
+        format.html { redirect_to @movie, notice: 'New movie was successfully created!' }
+        format.json { render :show, status: :created, location: @movie }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @movie.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
@@ -20,7 +32,15 @@ class Admin::MoviesController < ApplicationController
   def update
     authorize :movie, :update
 
-
+    respond_to do |format|
+      if @movie.update(post_params)
+        format.html { redirect_to @movie, notice: 'Movie was successfully updated!' }
+        format.json { render :show, status: :ok, location: @movie }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @movie.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -32,6 +52,17 @@ class Admin::MoviesController < ApplicationController
   private
 
   def get_movie_by_id
-    @movie = Movie.find(params[:id])
+    begin
+      @movie = Movie.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      unless current_user.role == 'user'
+        redirect_to root_path, flash: { alert: "Oops, movie with id: #{params[:id]} not found!" }
+      end
+    end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:movie).permit(:title, :text)
   end
 end

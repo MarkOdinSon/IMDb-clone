@@ -1,1 +1,7 @@
-Here new movies
+<h1>New movie</h1>
+
+  <%= render 'form', movie: @movie, this_url: '/admin/movies' %>
+
+<div>
+  <%= link_to "Back", :back %>
+</div>

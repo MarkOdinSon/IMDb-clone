@@ -22,6 +22,6 @@ class MoviePolicy < ApplicationPolicy
   private
 
   def check_user_role
-    user.admin? or user.super_admin?
+    user.admin? or user.super_admin? if user
   end
 end

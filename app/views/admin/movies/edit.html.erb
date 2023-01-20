@@ -1,1 +1,12 @@
-Here editing
+<h1>Editing movie</h1>
+ID: <%= @movie.id %><br>
+Rating: <%= @movie.rating %>
+
+  <%= render "form", movie: @movie, this_url: "/admin/movies/#{@movie.id}" %>
+
+<br>
+
+<div>
+  <%= link_to "Show this movie", @movie %> |
+  <%= link_to "Back", :back %>
+</div>

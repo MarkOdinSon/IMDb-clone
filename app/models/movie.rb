@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
   has_many :ratings
-  has_many :categories
+  has_many :movie_categories
+  has_many :categories, through: :movie_categories
 
   scope :already_rated, -> { where.not(rating: 0) }
   scope :not_rated_yet, -> { where(rating: 0) }

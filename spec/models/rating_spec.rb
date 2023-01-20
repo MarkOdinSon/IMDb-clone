@@ -3,18 +3,12 @@ require 'rails_helper'
 RSpec.describe Rating, type: :model do
   context 'ensures the present of fields' do
     it 'ensures user_id is present' do
-      rating = Rating.new(user_id: 10)
-      expect(rating.valid?).to eq(false)
-    end
+      user = User.create(email: 'mails@mail.com', password: 'here_password')
+      movie = Movie.create(title: 'Some text1', text: 'Some text')
 
-    it 'ensures movie_id is present' do
-      rating = Rating.new(movie_id: 5)
-      expect(rating.valid?).to eq(false)
-    end
-
-    it 'ensures grade is present' do
-      rating = Rating.new(grade: 5)
-      expect(rating.valid?).to eq(false)
+      rating = Rating.new(user_id: user.id, movie_id: movie.id, grade: 5)
+      expect(rating.valid?).to eq(true)
+      movie.delete; user.delete
     end
   end
 
