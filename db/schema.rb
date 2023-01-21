@@ -68,7 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_133808) do
 
   create_table "movies", force: :cascade do |t|
     t.string "title", null: false
-    t.string "text", null: false
     t.float "rating", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

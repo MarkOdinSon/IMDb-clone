@@ -16,9 +16,9 @@ class Movie < ApplicationRecord
 
   # validations
 
-  validates_presence_of :title, :text, :rating
+  validates_presence_of :title, :rating
 
-  validates :title, :text, presence: true
+  validates :title, presence: true
 
   validates :rating, numericality: { in: 0..10 }
 end

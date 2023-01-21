@@ -4,7 +4,7 @@
       <div class="rounded-t-lg overflow-hidden shadow-lg w-64 bg-gray-300">
         <a href="/movies/<%= movie.id %>">
           <% if movie.image.attached? %>
-            <%= image_tag movie.image %>
+            <%= image_tag movie.image, width: '100%' %>
           <% else %>
             <%= image_tag("no-img.png") %>
           <% end %>

@@ -13,7 +13,7 @@ class Admin::MoviesController < ApplicationController
 
     authorize :movie, :create?
 
-    @movie = Movie.create(title: 'title', text: 'text')
+    @movie = Movie.create(title: 'title')
 
     respond_to do |format|
       if @movie.update(post_params)
