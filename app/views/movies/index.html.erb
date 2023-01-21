@@ -1,9 +1,13 @@
 <div class="flex flex-wrap items-top justify-center place-items-top">
   <% @movies.each do |movie| %>
     <div class="m-5 max-w-xs">
-      <div class="rounded-t-lg overflow-hidden shadow-lg w-76 bg-gray-300">
+      <div class="rounded-t-lg overflow-hidden shadow-lg w-64 bg-gray-300">
         <a href="/movies/<%= movie.id %>">
-          <img class="p-0 rounded-t-lg" src="https://cdn.shopify.com/s/files/1/0057/3728/3618/products/3998dd3fa7e628e415e9805b960bec61_480x.progressive.jpg?v=1573592743" alt="Movie image" />
+          <% if movie.image.attached? %>
+            <%= image_tag movie.image %>
+          <% else %>
+            <%= image_tag("no-img.png") %>
+          <% end %>
         </a>
         <div class="px-6 py-1 text-center max-h-24">
           <div class="font-bold text-md"><%= movie.title %></div>

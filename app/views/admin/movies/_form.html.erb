@@ -5,7 +5,7 @@
 <%= form_with(model: movie, url: this_url) do |form| %>
   <% if movie.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
       <ul>
         <% movie.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -19,28 +19,58 @@
     <%= form.text_field :title, required: true, class: "bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
   </div>
 
-  <div class="">
+  <div class="my-5">
     <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <%= form.text_area :text, required: true, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="">
+  <div class="my-5">
     <%= form.label :category_ids %>
     <!--https://slimselectjs.com/install#cdn-->
-    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategories', class: 'text-lg'} %>
+    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategories', class: 'text-lg', required: true} %>
   </div>
 
-  <div class="inline">
+  <div class="my-5">
+    <% if movie.image.attached? %>
+      <%= image_tag movie.image, width: "256px" %>
+    <% end %>
+    <img id="output_image" width="256px" alt="Image not selected">
+  </div>
+
+  <div class="my-5">
+    <%= form.label :image %>
+    <%= form.file_field :image, accept: "image/*", onchange: "loadFileImg(event)" %>
+  </div>
+
+  <div class="inline ">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
 
 <!--https://slimselectjs.com/install#cdn-->
 <script>
-    new SlimSelect({
+    let select = new SlimSelect({
         select: '#selectCategories',
         settings: {
-            allowDeselect: true
+            allowDeselect: true,
+            minSelected: 1
         }
     })
+    if (select.getSelected().length == 0) // if new movie
+    {
+        select.setSelected('1') // default 'Action'
+    }
+</script>
+
+<script>
+    //https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+
+    let loadFileImg = function(event) {
+        let output = document.getElementById('output_image');
+        console.log(output)
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
 </script>

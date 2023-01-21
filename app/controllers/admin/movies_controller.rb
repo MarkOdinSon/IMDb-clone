@@ -11,17 +11,33 @@ class Admin::MoviesController < ApplicationController
   def create
     authorize :movie, :create?
 
-    @movie = Movie.new(post_params)
+    authorize :movie, :create?
+
+    @movie = Movie.create(title: 'title', text: 'text')
 
     respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'New movie was successfully created!' }
-        format.json { render :show, status: :created, location: @movie }
+      if @movie.update(post_params)
+        format.html { redirect_to @movie, notice: 'Movie was successfully created!' }
+        format.json { render :show, status: :ok, location: @movie }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+
+    # so for some reason it does not want to create records
+    # @movie = Movie.new(post_params)
+
+    # respond_to do |format|
+    #  if @movie.save
+    #    format.html { redirect_to @movie, notice: 'New movie was successfully created!' }
+    #    format.json { render :show, status: :created, location: @movie }
+    #  else
+    #    format.html { render :new, status: :unprocessable_entity }
+    #    format.json { render json: @movie.errors, status: :unprocessable_entity }
+    #  end
+    # end
+    #
   end
 
   def edit
@@ -55,14 +71,16 @@ class Admin::MoviesController < ApplicationController
     begin
       @movie = Movie.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      unless current_user.role == 'user'
-        redirect_to root_path, flash: { alert: "Oops, movie with id: #{params[:id]} not found!" }
+      if current_user
+        unless current_user.role == 'user'
+          redirect_to root_path, flash: { alert: "Oops, movie with id: #{params[:id]} not found!" }
+        end
       end
     end
   end
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:movie).permit(:title, :text, category_ids: [])
+    params.require(:movie).permit(:title, :text, :image, category_ids: [])
   end
 end
