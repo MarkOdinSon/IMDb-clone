@@ -15,26 +15,22 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :title, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-    <%= form.text_field :title, required: true, class: "bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
-    <%= form.text_area :text, required: true, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :category_ids %>
+    <%= form.label :category_ids, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <!--https://slimselectjs.com/install#cdn-->
     <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategories', class: 'text-lg', required: true} %>
   </div>
 
   <div class="my-5">
+    <%= form.label :title, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.text_field :title, required: true, class: "bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+  </div>
+
+  <div class="my-5">
     <% if movie.image.attached? %>
-      <%= image_tag movie.image, width: "256px" %>
+      <%= image_tag movie.image, width: "256px", id: "output_image" %>
+    <% else %>
+      <img id="output_image" width="256px" alt="Image not selected">
     <% end %>
-    <img id="output_image" width="256px" alt="Image not selected">
   </div>
 
   <div class="my-5">
@@ -42,13 +38,18 @@
     <%= form.file_field :image, accept: "image/*", onchange: "loadFileImg(event)" %>
   </div>
 
-  <div class="inline ">
+  <div class="my-5">
+    <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.rich_text_area :text %>
+  </div>
+
+  <div class="my-5">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
 
 <!--https://slimselectjs.com/install#cdn-->
-<script>
+<script type="text/javascript">
     let select = new SlimSelect({
         select: '#selectCategories',
         settings: {
@@ -62,7 +63,7 @@
     }
 </script>
 
-<script>
+<script type="text/javascript">
     //https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
 
     let loadFileImg = function(event) {
