@@ -1,10 +1,12 @@
-<div class="my-5">
-  <%= link_to "Show this movie", @movie %> |
-  <%= link_to "Back", :back %>
+<div class="container mx-auto mb-auto">
+  <div class="my-5">
+    <%= link_to "Show this movie", @movie %> |
+    <%= link_to "Back", :back %>
+  </div>
+
+  <h1>Editing movie</h1>
+  ID: <%= @movie.id %><br>
+  Rating: <%= @movie.rating %>
+
+  <%= render "form", movie: @movie, this_url: "/admin/movies/#{@movie.id}" %>
 </div>
-
-<h1>Editing movie</h1>
-ID: <%= @movie.id %><br>
-Rating: <%= @movie.rating %>
-
-<%= render "form", movie: @movie, this_url: "/admin/movies/#{@movie.id}" %>

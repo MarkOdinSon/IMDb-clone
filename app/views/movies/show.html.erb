@@ -1,3 +1,4 @@
+<div class="container mx-auto mb-auto">
   <div class="flex flex-wrap justify-start">
     <%= link_to "Back", :back %>
     <% if current_user %>
@@ -27,7 +28,7 @@
     <% if @movie.image.attached? %>
       <%= image_tag @movie.image, width: '256px' %>
     <% else %>
-      <%= image_tag("no-img.png") %>
+      <%= image_tag("no_img.png") %>
     <% end %>
   </div>
 
@@ -51,7 +52,8 @@
   </div>
 
   <div class="my-5">
-    <div class="trix-content">
+    <div class="trix-content truncate">
         <%= @movie.text %>
     </div>
- </div>
+  </div>
+</div>

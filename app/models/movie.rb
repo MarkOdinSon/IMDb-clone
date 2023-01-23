@@ -11,6 +11,9 @@ class Movie < ApplicationRecord
   # But in this situation I use existing field Movie.text, and everything works
   has_rich_text :text
 
+  # Paginator [https://github.com/kaminari/kaminari]
+  paginates_per 30 # default
+
   scope :already_rated, -> { where.not(rating: 0) }
   scope :not_rated_yet, -> { where(rating: 0) }
 
