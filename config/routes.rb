@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   root to: "movies#index"
 
+  post '/search-and-filter', to: 'movies#set_search_and_filter_options'
+
   resources :movies, only: :show
+
+  # it is possible to provide a star rating
+  resources :ratings, only: %i[create update destroy]
 
   namespace :admin do
     resources :movies, except: %i[index show]

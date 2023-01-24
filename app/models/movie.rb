@@ -17,6 +17,9 @@ class Movie < ApplicationRecord
   scope :already_rated, -> { where.not(rating: 0) }
   scope :not_rated_yet, -> { where(rating: 0) }
 
+  # search for movies on the home (root) page by title
+  scope :search_movies_by_title, ->(title) { Movie.where('LOWER(title) LIKE ?', "%#{title.downcase}%").order(id: :desc) }
+
   # validations
 
   validates_presence_of :title, :rating

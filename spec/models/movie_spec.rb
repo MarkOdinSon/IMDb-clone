@@ -41,6 +41,10 @@ RSpec.describe Movie, type: :model do
     it 'should be able to select not_rated_yet movies' do
       expect(Movie.not_rated_yet.count).to eq(3)
     end
+
+    it 'should be able to search movies by title' do
+      expect(Movie.search_movies_by_title('some title').class.to_s).to eq('Movie::ActiveRecord_Relation')
+    end
   end
 
   context 'relation (relationships with other tables)' do
