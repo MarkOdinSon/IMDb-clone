@@ -1,0 +1,46 @@
+<%= form_with(url: '/movies/set_search_option') do |form| %>
+  <div class="flex flex-wrap items-top justify-center place-items-top">
+    <div class="max-w-xs">
+      <!--https://slimselectjs.com/install#cdn-->
+      <%= form.select :category_ids, Category.pluck(:name, :id), {}, { multiple: true, id: 'selectCategoriesSearch', class: 'text-md' } %>
+    </div>
+    &nbsp&nbsp&nbsp
+    <div class="max-w-xs">
+      <%= form.text_field :title, id: "search_movie_by_title", class: "w-full block py-2.5 z-20 text-sm text-gray-900 bg-gray-50 border-gray-300", placeholder: " Movie title..." %>
+    </div>
+
+    <div class="max-w-xs">
+      <%= form.submit "Search", class: "rounded-r-lg border-l-gray-50 py-2 px-3 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      &nbsp&nbsp&nbsp&nbsp&nbsp
+    </div>
+  </div>
+<% end %>
+
+<!--https://slimselectjs.com/install#cdn-->
+<%= javascript_include_tag 'slimselect.min' %>
+<%= stylesheet_link_tag 'slimselect' %>
+
+<!--
+<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+<link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+-->
+
+<!--https://slimselectjs.com/install#cdn-->
+<script type="text/javascript">
+        var select = new SlimSelect({
+            select: '#selectCategoriesSearch',
+            settings: {
+                allowDeselect: true,
+                placeholderText: 'Select categories'
+            }
+        })
+</script>
+
+<!--Search hint by title jQuery-ui-->
+<script type="text/javascript">
+    $(function() {
+        $( "#search_movie_by_title" ).autocomplete({
+            source: [ <% @array_names_of_movie.length.times do |t| %>"<%= @array_names_of_movie.at(t) %>", <% end %>],
+        })
+    })
+</script>

@@ -3,7 +3,6 @@ class MoviesController < ApplicationController
     categories = params[:category]
     title = params[:title]
     page = params[:page]
-    # @found_movies = 0
 
     # There are three variants of search:
     # 1. First one is standard, When both are missing (no search and no filter) so must return all Movie
@@ -33,7 +32,7 @@ class MoviesController < ApplicationController
     end
   end
 
-  def set_search_and_filter_options
+  def set_search_option
     string_with_array_of_categories = Category.where(id: params[:category_ids]).map(&:name).join(', ').delete(' ')
 
     redirect_to "/?category=#{string_with_array_of_categories}&title=#{params[:title]}"

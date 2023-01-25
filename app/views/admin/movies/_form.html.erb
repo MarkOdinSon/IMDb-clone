@@ -1,7 +1,3 @@
-<!--https://slimselectjs.com/install#cdn-->
-<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
-<link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
-
 <%= form_with(model: movie, url: this_url) do |form| %>
   <% if movie.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
@@ -17,7 +13,7 @@
   <div class="my-5">
     <%= form.label :category_ids, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <!--https://slimselectjs.com/install#cdn-->
-    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategories', class: 'text-lg', required: true} %>
+    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategoriesForm', class: 'text-lg', required: true} %>
   </div>
 
   <div class="my-5">
@@ -49,12 +45,22 @@
 <% end %>
 
 <!--https://slimselectjs.com/install#cdn-->
+<%= javascript_include_tag 'slimselect.min' %>
+<%= stylesheet_link_tag 'slimselect' %>
+
+<!--
+<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+<link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+-->
+
+<!--https://slimselectjs.com/install#cdn-->
 <script type="text/javascript">
-    let select = new SlimSelect({
-        select: '#selectCategories',
+    var select = new SlimSelect({
+        select: '#selectCategoriesForm',
         settings: {
             allowDeselect: true,
-            minSelected: 1
+            minSelected: 1,
+            placeholderText: 'Select categories'
         }
     })
     if (select.getSelected().length == 0) // if new movie
