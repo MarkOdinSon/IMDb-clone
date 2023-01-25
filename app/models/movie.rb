@@ -39,6 +39,6 @@ class Movie < ApplicationRecord
 
     movie_ids = MovieCategory.where(category_id: array_of_category_ids).map(&:movie_id).uniq
 
-    Movie.where(id: movie_ids)
+    Movie.where(id: movie_ids).order(id: :desc)
   end
 end

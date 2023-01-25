@@ -12,21 +12,17 @@ class MoviesController < ApplicationController
     # 4. First one is When there are only categories and there is no title
 
     # here variant #1
-    # if categories.nil? && categories == '' && title.nil? && title == ''
-    #  @movies = Movie.all.order(id: :desc).page(params[:page])
-    #  render
-    # end
+    return @movies = Movie.all.order(id: :desc).page(page) if (categories == '' && title == '') || (categories.nil? && title.nil?)
 
     # here variant #2
-    #unless categories.nil? && categories == '' && !(title.nil? && title == '')
-    #  @movies = Movie.search_movies_by_categories(categories).page(page)
-    #end
+    return @movies = Movie.search_movies_by_categories(categories).page(page) if categories != '' && title == ''
 
     # here variant #3
-    #@movies = Movie.search_movies_by_title(title).page(page) unless title.nil? && title == ''
+    return @movies = Movie.search_movies_by_title(title).page(page) if title != '' && categories == ''
 
     # here variant #4
-
+    @movies = Movie.search_movies_by_categories(categories)
+    @movies = @movies.where(id: Movie.search_movies_by_title(title).ids).page(page)
   end
 
   def show
