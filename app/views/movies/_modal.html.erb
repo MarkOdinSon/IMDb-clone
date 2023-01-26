@@ -10,13 +10,9 @@
           <div class="px-6 py-1 text-center">
             <div class="font-bold text-lg truncate text-ellipsis"><%= movie.title %></div>
           </div>
-          <%= link_to t('.create'),
-                      ratings_path,
-                      class: 'button',
-                      data: { turbo_frame: dom_id(Rating.new) }
-          %>
-
-        <%= turbo_frame_tag Rating.new %>
+        <button id='send_fetch_button_id_1'>
+          Send fetch
+        </button>
       </div>
     </div>
   </div>
@@ -31,8 +27,8 @@
       </button>
       <div class="p-6 text-center">
         <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-        <button data-modal-hide="popup-modal-when-already-rated" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">HERE STARS</h3>
+        <button id='send_fetch_button_id' data-modal-hide="popup-modal-when-already-rated" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
           Rate
         </button>
         <button data-modal-hide="popup-modal-when-already-rated" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
@@ -43,3 +39,29 @@
   </div>
 </div>
 
+<script type="text/javascript">
+    var generateBtn = document.getElementById('send_fetch_button_id');
+    generateBtn.addEventListener('click', fetchData);
+
+    function fetchData() {
+        fetch('/ratings/create', {
+            method: 'post',
+            headers: {
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                <!--sample-->
+                movie_id: 'I send the name!',
+                user_id: 'I send the name!',
+                grade: '8'
+            })
+        }).then (response => response.text())
+            .then(html => Turbo.renderStreamMessage(html));
+    }
+</script>
+
+<!--
+Our csrf-token we can get at the head of our view
+(rails generate token automatically and return it in the head of each page see file: (layout/application)
+-->

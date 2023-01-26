@@ -36,11 +36,7 @@
     <div class="font-bold text-md"><%= @movie.title %></div>
   </div>
 
-
-
-  <%= render "rating", movie: @movie %>
-
-
+  <%= render partial: 'movies/rating', locals: { movie: @movie } %>
 
   <div class="px-6 pt-4 pb-2">
     <% if @movie.categories.exists? %>
