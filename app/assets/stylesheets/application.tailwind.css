@@ -10,3 +10,4 @@
 @import "tailwindcss/utilities";
 
 *= require slimselect
+*= require multi-select-tag
