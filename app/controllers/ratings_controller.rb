@@ -3,35 +3,60 @@ class RatingsController < ApplicationController
   # [https://fly.io/ruby-dispatch/turbostream-fetch/]
 
   def create
-    flash[:alert] = "Create rating"
+    Rating.create(post_params)
 
-    Movie.find(69).update(rating: 5)
+    recalculate_average_rating(post_params[:movie_id])
 
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("turbo_frame_show_movie_rating_inf_72",
-                                                  render_to_string( partial: 'movies/rating', locals: { movie: Movie.find(72) }) )
-      }
-
-      format.html { redirect_to (request.referrer || root_path) }
-    end
+    respond_with_turbo_stream(post_params[:movie_id])
   end
 
   def update
-    flash[:alert] = "Update rating"
+    Rating.where(movie_id: post_params[:movie_id], user_id: post_params[:user_id]).update(grade: post_params[:grade])
 
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("my_turbo_frame_50",
-                                                  render_to_string( partial: 'movies/rating', locals: { movie: Movie.find(50) }) )
-      }
+    recalculate_average_rating(post_params[:movie_id])
 
-      format.html { redirect_to (request.referrer || root_path) }
-    end
+    respond_with_turbo_stream(post_params[:movie_id])
   end
 
   def destroy
-    flash[:alert] = "Destroy rating"
+    Rating.where(movie_id: post_params[:movie_id], user_id: post_params[:user_id]).first.delete
 
+    recalculate_average_rating(post_params[:movie_id])
+
+    respond_with_turbo_stream(post_params[:movie_id])
+  end
+
+  private
+
+  def recalculate_average_rating(movie_id)
+    sum = 0.0
+    all_grades = Rating.where(movie_id: movie_id).map(&:grade)
+
+    all_grades.each do |i|
+      sum += i
+    end
+
+    begin
+      return Movie.find(movie_id).update(rating: sum / all_grades.count) if all_grades.count.positive?
+
+      Movie.find(movie_id).update(rating: 0)
+    rescue StandardError
+      redirect_to root_path, flash: { alert: 'Something went wrong in function calculate average rating! Contact the developer!' }
+    end
+  end
+
+  def respond_with_turbo_stream(movie_id)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("turbo_frame_show_movie_rating_inf_#{post_params[:movie_id]}",
+                                                  render_to_string(partial: 'movies/rating',
+                                                                   locals: { movie: Movie.find(post_params[:movie_id]) }))
+      end
+    end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:rating).permit(:user_id, :movie_id, :grade)
   end
 end

@@ -31,7 +31,7 @@
           <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_updateRatingFetch()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
             Rate
           </button>
-          <button data-modal-hide="<%= name %>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+          <button data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_deleteRatingFetch()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
             Remove rating
           </button>
         </div>
@@ -52,6 +52,22 @@
                   movie_id: <%= movie.id %>,
                   user_id: <%= current_user.id %>,
                   grade: document.getElementById("field_with_grade_<%= movie.id %>").innerHTML
+              })
+          }).then (response => response.text())
+              .then(html => Turbo.renderStreamMessage(html));
+      }
+
+      function for_movie_<%= movie.id %>_deleteRatingFetch() {
+          fetch('/ratings/destroy', {
+              method: 'DELETE',
+              headers: {
+                  'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+                  'Content-type': 'application/json; charset=UTF-8'
+              },
+              body: JSON.stringify({
+                  <!--sample-->
+                  movie_id: <%= movie.id %>,
+                  user_id: <%= current_user.id %>,
               })
           }).then (response => response.text())
               .then(html => Turbo.renderStreamMessage(html));
@@ -125,7 +141,7 @@
         -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         text-align: center;
-        background: darkblue;
+        background: blueviolet;
         color: white;
     }
 
