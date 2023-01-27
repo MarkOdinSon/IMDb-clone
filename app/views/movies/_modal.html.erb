@@ -8,13 +8,27 @@
           <span class="sr-only">Close modal</span>
         </button>
         <div class="p-6 text-center">
+
+          <div class="flex justify-center">
+            <div class="my-2 ">
+              <% if movie.image.attached? %>
+                <%= image_tag movie.image, width: '140px', height: '186px' %>
+              <% end %>
+            </div>
+
+            <!--From here fetch with js help finds out what grade to send to the server-->
+            <div class=" flex items-center">
+              <div id="field_with_grade_<%= movie.id %>" class="star ml-2 text-xl font-medium text-gray-500 dark:text-gray-400 my-5"><%= current_user_grade %></div>
+            </div>
+          </div>
+
           <div class="font-bold text-lg truncate text-ellipsis"><%= movie.title %></div>
           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
 
-          <%= render partial: 'movies/rating_star_bar', locals: {  movie: movie, type: type } %>
+          <%= render partial: 'movies/rating_star_bar', locals: {  movie: movie, type: type, current_user_grade: current_user_grade } %>
 
           </h3>
-          <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_updateRatingFetch()" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+          <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_updateRatingFetch()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
             Rate
           </button>
           <button data-modal-hide="<%= name %>" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
@@ -37,7 +51,7 @@
                   <!--sample-->
                   movie_id: <%= movie.id %>,
                   user_id: <%= current_user.id %>,
-                  grade: '8'
+                  grade: document.getElementById("field_with_grade_<%= movie.id %>").innerHTML
               })
           }).then (response => response.text())
               .then(html => Turbo.renderStreamMessage(html));
@@ -54,13 +68,27 @@
           <span class="sr-only">Close modal</span>
         </button>
         <div class="p-6 text-center">
+
+          <div class="flex justify-center">
+            <div class="my-2 ">
+              <% if movie.image.attached? %>
+                <%= image_tag movie.image, width: '140px', height: '186px' %>
+              <% end %>
+            </div>
+
+            <!--From here fetch with js help finds out what grade to send to the server-->
+            <div class=" flex items-center">
+              <div id="field_with_grade_<%= movie.id %>" class="star ml-2 text-xl font-medium text-gray-500 dark:text-gray-400 my-5">?</div>
+            </div>
+          </div>
+
           <div class="font-bold text-lg truncate text-ellipsis"><%= movie.title %></div>
           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
 
           <%= render partial: 'movies/rating_star_bar', locals: {  movie: movie, type: type } %>
 
           </h3>
-          <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_createRatingFetch()" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+          <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_createRatingFetch()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
             Rate
           </button>
         </div>
@@ -80,7 +108,7 @@
                   <!--sample-->
                   movie_id: <%= movie.id %>,
                   user_id: <%= current_user.id %>,
-                  grade: '8'
+                  grade: document.getElementById("field_with_grade_<%= movie.id %>").innerHTML
               })
           }).then (response => response.text())
               .then(html => Turbo.renderStreamMessage(html));
@@ -88,6 +116,27 @@
   </script>
 
 <% end %>
+
+<!--Draw star with selected grade-->
+<style type="text/css">
+    .star {
+        height: 100px;
+        width: 100px;
+        -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        text-align: center;
+        background: darkblue;
+        color: white;
+    }
+
+    .star::before {
+        display: inline-block;
+        height: 100%;
+        background: blue;
+        vertical-align: middle;
+        content: '';
+    }
+</style>
 
 <!--
 Our csrf-token we can get at the head of our view
