@@ -35,6 +35,6 @@ module AppIMDbClone
     origins.map! { |url| /#{url}/ }
     config.action_cable.allowed_request_origins = origins
 
-    config.active_storage.variant_processor = :mini_magick
+    config.active_storage.variant_processor = :mini_magick # not sure if application need it
   end
 end

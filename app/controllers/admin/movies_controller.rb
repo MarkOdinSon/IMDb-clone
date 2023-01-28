@@ -60,7 +60,21 @@ class Admin::MoviesController < ApplicationController
   def destroy
     authorize :movie, :destroy
 
-    ###
+    # first delete all categories that belong to this movie
+    MovieCategory.delete(MovieCategory.where(movie_id: @movie.id).ids)
+
+    # second delete all ratings that belong to this movie
+    Rating.delete(Rating.where(movie_id: @movie.id).ids)
+
+    # finally we can delete the movie post from our data base
+    begin
+      @movie.delete
+    rescue ActiveRecordError::RecordNotFound
+      flash[:alert] = 'Something went wrong! Movie with this id not found! :('
+      redirect_to(request.referrer || root_path)
+    end
+
+    redirect_to root_path, flash: { alert: 'Movie post has been successfully deleted!' }
   end
 
   private

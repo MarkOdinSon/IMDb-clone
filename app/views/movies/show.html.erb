@@ -1,7 +1,7 @@
 <div class="p-4">
   <div class="flex flex-wrap justify-end">
     <% if current_user %>
-      <% if current_user.admin? or current_user.super_admin? %>
+      <% unless current_user.user? %>
         <!--Link to edit a movie-->
         <div class="flex">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
@@ -10,6 +10,9 @@
               <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
             </a>
           </svg>
+        </div>
+        <div class="flex justify-end mx-1.5">
+          <%= button_to "Delete", "/admin/movies/#{@movie.id}", method: :delete, class: 'text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900',data: { turbo_confirm: 'Are you sure you want to delete this movie post?' } %>
         </div>
       <% end %>
     <% end %>

@@ -281,6 +281,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kaminari
+  mini_magick
   pg (~> 1.1)
   puma (~> 6.0)
   pundit (~> 2.3.0)
