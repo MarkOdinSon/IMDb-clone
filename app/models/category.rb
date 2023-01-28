@@ -36,5 +36,7 @@ class Category < ApplicationRecord
     #default: :Action }
 =end
 
+  # validations
+
   validates_presence_of :name
 end

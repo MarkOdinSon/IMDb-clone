@@ -43,6 +43,9 @@ CMD ["bash"]
 
 FROM ruby:3.2.0-slim-bullseye AS app
 
+RUN apt-get update && apt-get install -y \
+   imagemagick
+
 WORKDIR /app
 
 ARG UID=1000

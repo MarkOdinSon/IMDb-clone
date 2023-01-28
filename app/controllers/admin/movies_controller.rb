@@ -11,8 +11,6 @@ class Admin::MoviesController < ApplicationController
   def create
     authorize :movie, :create?
 
-    authorize :movie, :create?
-
     @movie = Movie.create(title: 'title')
 
     respond_to do |format|
@@ -25,7 +23,7 @@ class Admin::MoviesController < ApplicationController
       end
     end
 
-    # so for some reason it does not want to create records
+    # So for some reason it does not want to create records
     # @movie = Movie.new(post_params)
 
     # respond_to do |format|
@@ -37,11 +35,11 @@ class Admin::MoviesController < ApplicationController
     #    format.json { render json: @movie.errors, status: :unprocessable_entity }
     #  end
     # end
-    #
   end
 
   def edit
     authorize :movie, :edit
+
     flash[:notice] = 'Hi, Admin. Here you can edit an existing movie!'
   end
 
@@ -62,7 +60,7 @@ class Admin::MoviesController < ApplicationController
   def destroy
     authorize :movie, :destroy
 
-
+    ###
   end
 
   private

@@ -55,8 +55,13 @@ gem "composite_primary_keys", "~> 14"
 # [https://github.com/varvet/pundit]
 gem "pundit", "~> 2.3.0"
 
+# Paginator [https://github.com/kaminari/kaminari]
+gem 'kaminari'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
+
+# gem "mini_magick" not sure if application need it
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -72,9 +77,6 @@ group :development, :test do
 
   # For RSpec model reference [https://github.com/thoughtbot/shoulda-matchers]
   gem 'shoulda-matchers', '~> 5.0'
-
-  # Paginator [https://github.com/kaminari/kaminari]
-  gem 'kaminari'
 end
 
 group :development do

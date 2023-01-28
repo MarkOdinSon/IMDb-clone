@@ -3,7 +3,7 @@ class Rating < ApplicationRecord
   belongs_to :user
   belongs_to :movie
 
-  #validations
+  # validations
 
   validates_presence_of :user_id, :movie_id, :grade
 
