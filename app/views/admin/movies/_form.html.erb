@@ -31,7 +31,7 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :image %>
+    <%= form.label :image, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <%= form.file_field :image, accept: "image/*", onchange: "loadFileImg(event)" %>
   </div>
 
@@ -39,7 +39,7 @@
     <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <%= form.rich_text_area :text %>
   </div>
-  <p class="text-gray-500"><i>if nothing happens after clicking the button make sure you have selected at least one category</i></p>
+  <p class="text-gray-500"><i>(if nothing happens after clicking the button make sure you have selected at least one category)</i></p>
   <div class="my-5">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>

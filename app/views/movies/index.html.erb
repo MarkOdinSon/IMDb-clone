@@ -1,5 +1,5 @@
 <p class="text-lg font-black text-gray-900 dark:text-white text-center">
-  found <%= @movies.total_count %> records
+  found <%= @movies.total_count %> movies
   <% if @movies.total_count > 30 %>
   <div class="my-5 text-center z-10 px-3 py-2 leading-tight text-blue-600 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
     <%= paginate @movies %>
