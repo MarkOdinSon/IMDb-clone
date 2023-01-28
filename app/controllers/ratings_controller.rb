@@ -37,7 +37,7 @@ class RatingsController < ApplicationController
     end
 
     begin
-      return Movie.find(movie_id).update(rating: sum / all_grades.count) if all_grades.count.positive?
+      return Movie.find(movie_id).update(rating: (sum / all_grades.count).round(1)) if all_grades.count.positive?
 
       Movie.find(movie_id).update(rating: 0)
     rescue StandardError

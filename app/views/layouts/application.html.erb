@@ -25,13 +25,23 @@
       include Flowbite via CDN with turbo support
     -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.turbo.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+
 
     <!--for jquery-ui-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
   </head>
+
+  <!--Background image-->
+  <style type="text/css">
+      body {
+          background-image: url('/assets/back_ground_img');
+          background-size: cover;
+          background-repeat: space;
+      }
+  </style>
 
   <body class="flex flex-col h-screen justify-between">
     <!--This is header-->
@@ -65,7 +75,7 @@
     <footer class="bg-gray-700 text-center lg:text-left">
       <div class="text-gray-100 text-center p-4" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2023 Copyright:
-        <a class="text-gray-100" href="#">Mark H.</a>
+        <a class="text-gray-100" href="#">Mark Hladkov</a>
       </div>
     </footer>
   </body>

@@ -14,6 +14,7 @@
     <%= form.label :category_ids, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <!--https://slimselectjs.com/install#cdn-->
     <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategoriesForm', class: 'text-lg', required: true} %>
+    <p class="text-gray-500"><i>at least one category must be selected</i></p>
   </div>
 
   <div class="my-5">
@@ -38,35 +39,17 @@
     <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
     <%= form.rich_text_area :text %>
   </div>
-
+  <p class="text-gray-500"><i>if nothing happens after clicking the button make sure you have selected at least one category</i></p>
   <div class="my-5">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
 <% end %>
 
-<%= stylesheet_link_tag 'multi-selects/slimselect.css' %>
-<%= javascript_include_tag 'multi-selects/slimselect.min.js' %>
+<%= stylesheet_link_tag 'multi-selects/multi-select-tag' %>
+<%= javascript_include_tag 'multi-selects/multi-select-tag' %>
 
-<!--
-<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
-<link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
--->
-
-
-<!--https://slimselectjs.com/install#cdn-->
 <script type="text/javascript">
-    var select = new SlimSelect({
-        select: '#selectCategoriesForm',
-        settings: {
-            allowDeselect: true,
-            minSelected: 1,
-            placeholderText: 'Select categories'
-        }
-    })
-    if (select.getSelected().length == 0) // if new movie
-    {
-        select.setSelected('1') // default 'Action'
-    }
+    new MultiSelectTag('selectCategoriesForm')
 </script>
 
 <script type="text/javascript">

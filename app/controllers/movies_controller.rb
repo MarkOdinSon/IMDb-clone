@@ -32,6 +32,16 @@ class MoviesController < ApplicationController
     end
   end
 
+  # shows a page that contains only those movies that the current user has rated (combines pages "liked films" and "selected films")
+  def show_rated_by_user
+    begin
+      @movies = Movie.where(id: Rating.where(user_id: current_user.id).map(&:movie_id)).page(params[:page])
+      render 'movies/index'
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path, flash: { alert: "You haven't rated any movies! Rate at least one and the page will become available!" }
+    end
+  end
+
   def set_search_option
     string_with_array_of_categories = Category.where(id: params[:category_ids]).map(&:name).join(', ').delete(' ')
 
