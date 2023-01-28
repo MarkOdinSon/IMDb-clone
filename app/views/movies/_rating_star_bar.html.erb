@@ -1,0 +1,144 @@
+<span class="star__container justify-center">
+  <input type="radio" name="rating" value="1" id="star-1_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '1';">
+  <input type="radio" name="rating" value="2" id="star-2_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '2';">
+  <input type="radio" name="rating" value="3" id="star-3_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '3';">
+  <input type="radio" name="rating" value="4" id="star-4_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '4';">
+  <input type="radio" name="rating" value="5" id="star-5_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '5';">
+  <input type="radio" name="rating" value="6" id="star-6_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '6';">
+  <input type="radio" name="rating" value="7" id="star-7_<%= movie.id%>" class="star__radio visuhide"   onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '7';">
+  <input type="radio" name="rating" value="8" id="star-8_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '8';">
+  <input type="radio" name="rating" value="9" id="star-9_<%= movie.id %>" class="star__radio visuhide"  onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '9';">
+  <input type="radio" name="rating" value="10" id="star-10_<%= movie.id%>" class="star__radio visuhide" onclick="document.getElementById('field_with_grade_<%= movie.id %>').innerHTML = '10';">
+
+  <label class="star__item_<%= movie.id %>" for="star-1_<%= movie.id %>"><span class="visuhide">1 star</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-2_<%= movie.id %>"><span class="visuhide">2 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-3_<%= movie.id %>"><span class="visuhide">3 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-4_<%= movie.id %>"><span class="visuhide">4 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-5_<%= movie.id %>"><span class="visuhide">5 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-6_<%= movie.id %>"><span class="visuhide">6 star</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-7_<%= movie.id %>"><span class="visuhide">7 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-8_<%= movie.id %>"><span class="visuhide">8 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-9_<%= movie.id %>"><span class="visuhide">9 stars</span></label>
+  <label class="star__item_<%= movie.id %>" for="star-10_<%= movie.id %>"><span class="visuhide">10 stars</span></label>
+</span>
+
+<style type="text/css">
+    .visuhide {
+        position: absolute !important;
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+        clip: rect(1px, 1px, 1px, 1px);
+    }
+
+    .star__container:hover .star__item_<%= movie.id %>, .star__radio:checked ~ .star__item_<%= movie.id %> {
+        -webkit-filter: grayscale(0);
+        filter: grayscale(0);
+    }
+
+    .star__radio:nth-of-type(1):checked ~ .star__item_<%= movie.id %>:nth-of-type(1)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(2):checked ~ .star__item_<%= movie.id %>:nth-of-type(2)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(3):checked ~ .star__item_<%= movie.id %>:nth-of-type(3)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(4):checked ~ .star__item_<%= movie.id %>:nth-of-type(4)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(5):checked ~ .star__item_<%= movie.id %>:nth-of-type(5)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(6):checked ~ .star__item_<%= movie.id %>:nth-of-type(6)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(7):checked ~ .star__item_<%= movie.id %>:nth-of-type(7)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(8):checked ~ .star__item_<%= movie.id %>:nth-of-type(8)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(9):checked ~ .star__item_<%= movie.id %>:nth-of-type(9)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+    .star__radio:nth-of-type(10):checked ~ .star__item_<%= movie.id %>:nth-of-type(10)::before {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+        transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+    }
+
+    .star__container:not(:hover) > .star__radio:nth-of-type(1):checked ~ .star__item_<%= movie.id %>:nth-of-type(1) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(2):checked ~ .star__item_<%= movie.id %>:nth-of-type(2) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(3):checked ~ .star__item_<%= movie.id %>:nth-of-type(3) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(4):checked ~ .star__item_<%= movie.id %>:nth-of-type(4) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(5):checked ~ .star__item_<%= movie.id %>:nth-of-type(5) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(6):checked ~ .star__item_<%= movie.id %>:nth-of-type(6) ~ .star__item_<%= movie.id %>, .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(7):checked ~ .star__item_<%= movie.id %>:nth-of-type(7) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(8):checked ~ .star__item_<%= movie.id %>:nth-of-type(8) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(9):checked ~ .star__item_<%= movie.id %>:nth-of-type(9) ~ .star__item_<%= movie.id %>, .star__container:not(:hover) > .star__radio:nth-of-type(10):checked ~ .star__item_<%= movie.id %>:nth-of-type(10) ~ .star__item_<%= movie.id %>, .star__item_<%= movie.id %>:hover ~ .star__item_<%= movie.id %> {
+        -webkit-filter: grayscale(1);
+        filter: grayscale(1);
+    }
+
+    /* If the movie has already been rated by current user, then css need to display the rating that he gave */
+    <% if type == 'already_rated' %>
+        .star__radio:nth-of-type(<%= current_user_grade %>) ~ .star__item_<%= movie.id %>:nth-of-type(<%= current_user_grade %>) {
+            -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+            transition-timing-function: cubic-bezier(0.5, 1.5, 0.25, 1);
+        }
+
+        .star__container:hover .star__item_<%= movie.id %>, .star__radio ~ .star__item_<%= movie.id %> {
+            -webkit-filter: grayscale(0);
+            filter: grayscale(0);
+        }
+
+        .star__container:not(:hover) > .star__radio:nth-of-type(<%= current_user_grade %>) ~ .star__item_<%= movie.id %>:nth-of-type(<%= current_user_grade %>) ~ .star__item_<%= movie.id %>, .star__item_<%= movie.id %>:hover ~ .star__item_<%= movie.id %> {
+            -webkit-filter: grayscale(1);
+            filter: grayscale(1);
+        }
+    <% end %>
+
+    .star__container {
+        display: flex;
+        margin: auto;
+        border-radius: .25em;
+        background-color: grey;
+        box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.25);
+        transition: box-shadow .3s ease;
+    }
+    .star__container:focus-within {
+        box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.5);
+    }
+    .star__item_<%= movie.id %> {
+        display: inline-flex;
+        width: 2.25em;
+        height: 2.5em;
+    }
+    .star__item_<%= movie.id %>::before {
+        content: "⭐️";
+        display: inline-block;
+        margin: auto;
+        font-size: .75em;
+        vertical-align: top;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transform-origin: 50% 33.3%;
+        transform-origin: 50% 33.3%;
+        transition: -webkit-transform .3s ease-out;
+        transition: transform .3s ease-out;
+        transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+    }
+</style>

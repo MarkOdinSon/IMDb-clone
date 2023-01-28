@@ -3,7 +3,19 @@ Rails.application.routes.draw do
 
   root to: "movies#index"
 
-  resources :movies, only: :show
+  # it is possible to provide a star rating
+
+  post   '/ratings/create', to: "ratings#create"
+  patch  '/ratings/update', to: "ratings#update"
+  delete '/ratings/destroy', to: "ratings#destroy"
+
+  resources :movies do
+    collection do
+      get :show
+      get :show_rated_by_user
+      post :set_search_option
+    end
+  end
 
   namespace :admin do
     resources :movies, except: %i[index show]

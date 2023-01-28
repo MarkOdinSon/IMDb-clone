@@ -1,0 +1,60 @@
+<%#= stylesheet_link_tag 'multi-selects/slimselect.css' %>
+<%#= javascript_include_tag 'multi-selects/slimselect.min.js' %>
+
+<!--
+<script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+<link href="https://unpkg.com/slim-select@latest/dist/slimselect.css" rel="stylesheet"></link>
+-->
+
+<%= stylesheet_link_tag 'multi-selects/multi-select-tag' %>
+<%= javascript_include_tag 'multi-selects/multi-select-tag' %>
+
+<!--
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+-->
+
+  <%= form_with(url: '/movies/set_search_option') do |form| %>
+    <div class="flex flex-wrap items-top justify-left place-items-top">
+      <div class=" max-w-xs my-2">
+        <p class="text-gray-500 text-xs">Select Categories</p>
+        <!--https://slimselectjs.com/install#cdn-->
+        <%= form.select :category_ids, Category.pluck(:name, :id), {}, { multiple: true, id: 'selectCategoriesSearch', class: 'text-ms' } %>
+      </div>
+      &nbsp&nbsp&nbsp
+      <div class="flex">
+        <%= form.text_field :title, id: "search_movie_by_title", class: "w-full block py-2.5 z-20 text-sm text-gray-900 bg-gray-50 border-gray-300", placeholder: " Movie title..." %>
+        <%= form.submit "Search", class: "pl-2 rounded-r-lg border-l-gray-50 py-2 px-3 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        &nbsp&nbsp&nbsp&nbsp&nbsp
+      </div>
+    </div>
+  <% end %>
+
+<!--In this case I use this multiple select instead of SlimSelect due to the fact that SlimSelect requires more time to load-->
+<script type="text/javascript">
+    new MultiSelectTag('selectCategoriesSearch')
+</script>
+
+<!--Search hint by title jQuery-ui-->
+<!--Not awesome but works-->
+<script type="text/javascript">
+    $(function() {
+        $( "#search_movie_by_title" ).autocomplete({
+            source: [ <% @array_names_of_movie.length.times do |t| %>"<%= @array_names_of_movie.at(t) %>", <% end %>],
+        })
+    })
+</script>
+
+<!--https://slimselectjs.com/install#cdn-->
+<!--Delete this script if you don't want to see slim select on the header of the page (if you delete then there will be a standard html multi select)-->
+<script type="text/javascript">
+    /*
+    var select = new SlimSelect({
+        select: '#selectCategoriesSearch',
+        settings: {
+            allowDeselect: true,
+            placeholderText: 'Select categories'
+        }
+    })
+    */
+</script>

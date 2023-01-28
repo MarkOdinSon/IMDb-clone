@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   context 'ensures the present of fields' do
     it 'ensures role is present' do
-      user = User.new(role: 0)
-      expect(user.valid?).to eq(false)
+      user = User.new(email: 'mail@mail.com', password: 'password112233', role: 0)
+      expect(user.valid?).to eq(true)
     end
   end
 

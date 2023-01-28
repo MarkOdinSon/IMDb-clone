@@ -1,39 +1,42 @@
 class Category < ApplicationRecord
-  self.primary_keys = :movie_id, :movie_category
-  belongs_to :movie
+  has_many :movie_categories
+  has_many :movies, through: :movie_categories
 
-  enum movie_category: {
-    Action: 0,
-    Adventure: 1,
-    Animation: 2,
-    Biography: 3,
-    Comedy: 4,
-    Crime: 5,
-    Documentary: 6,
-    Drama: 7,
-    Family: 8,
-    Fantasy: 9,
-    FilmNoir: 10,
-    GameShow: 11,
-    History: 12,
-    Horror: 13,
-    Music: 14,
-    Musical: 15,
-    Mystery: 16,
-    News: 17,
-    RealityTV: 18,
-    Romance: 19,
-    SciFi: 20,
-    Sport: 21,
-    TalkShow: 22,
-    Thriller: 23,
-    War: 24,
-    Western: 25,
+  scope :get_list_categories, -> { Category.all.map(&:name) }
 
-    #default: :Action
-  }
+=begin
+    enum movie_category: {
+    Action: 1,
+    Adventure: 2,
+    Animation: 3,
+    Biography: 4,
+    Comedy: 5,
+    Crime: 6,
+    Documentary: 7,
+    Drama: 8,
+    Family: 9,
+    Fantasy: 10,
+    FilmNoir: 11,
+    GameShow: 12,
+    History: 13,
+    Horror: 14,
+    Music: 15,
+    Musical: 16,
+    Mystery: 17,
+    News: 18,
+    RealityTV: 19,
+    Romance: 20,
+    SciFi: 21,
+    Sport: 22,
+    TalkShow: 23,
+    Thriller: 24,
+    War: 25,
+    Western: 26,
 
-  validates_presence_of :movie_id, :movie_category
+    #default: :Action }
+=end
 
-  validates :movie_category, numericality: { only_integer: true, in: 0..25 }
+  # validations
+
+  validates_presence_of :name
 end

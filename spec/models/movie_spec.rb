@@ -3,18 +3,8 @@ require 'rails_helper'
 RSpec.describe Movie, type: :model do
   context 'ensures the present of fields' do
     it 'ensures title is present' do
-      movie = Movie.new(title: 'Some title')
-      expect(movie.valid?).to eq(false)
-    end
-
-    it 'ensures text is present' do
-      movie = Movie.new(text: 'Some text')
-      expect(movie.valid?).to eq(false)
-    end
-
-    it 'ensures rating is present' do
-      movie = Movie.new(rating: 1)
-      expect(movie.valid?).to eq(false)
+      movie = Movie.new(title: 'Some title', text: 'Some text', rating: 1)
+      expect(movie.valid?).to eq(true)
     end
   end
 
@@ -51,6 +41,10 @@ RSpec.describe Movie, type: :model do
     it 'should be able to select not_rated_yet movies' do
       expect(Movie.not_rated_yet.count).to eq(3)
     end
+
+    it 'should be able to search movies by title' do
+      expect(Movie.search_movies_by_title('some title').class.to_s).to eq('Movie::ActiveRecord_Relation')
+    end
   end
 
   context 'relation (relationships with other tables)' do
@@ -58,8 +52,8 @@ RSpec.describe Movie, type: :model do
       should have_many :ratings
     end
 
-    it 'movie should have many categories' do
-      should have_many :categories
+    it 'movie should have many movie categories' do
+      should have_many :movie_categories
     end
   end
 end

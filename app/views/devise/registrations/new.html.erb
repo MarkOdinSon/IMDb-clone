@@ -1,29 +1,63 @@
-<h2>Sign up</h2>
+<div class="flex h-screen items-center justify-center">
+  <div class="flex justify-center flex-wrap mx-1.5">
+    <!--Image-->
+    <div class="flex">
+      <%= image_tag 'log_in_img.webp', width: '520px', class: 'rounded-full' %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <!--Form-->
+    <div class="flex items-center mx-1.5">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <p class="text-xl text-center">
+          Sign up
+        </p>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <!-- Email input -->
+        <div class="mb-6">
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'mb-2 form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none', placeholder: "Your email address" %>
+          </div>
+        </div>
+
+        <!-- Password inputs -->
+        <div class="mb-6">
+          <div class="field">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "new password", class: 'form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none', placeholder: 'New password' %>
+          </div>
+          <p class="text-gray-500">min 6 symbols</p>
+        </div>
+
+        <div class="mb-6">
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "repeat new password", class: 'form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none', placeholder: 'Repeat new password' %>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-2">
+          <p class="flex text-sm mt-2 pt-1 mb-0 justify-center">
+            Already have an account? &nbsp
+            <%= render "devise/shared/links" %>
+          </p>
+        </div>
+
+        <div class="text-center lg:text-left">
+          <div class="actions">
+            <button class="py-3 text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 inline-flex space-x-2 items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+              </svg>
+              <%= f.submit "Sing up" %>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<script type="text/javascript">
+    window.scrollTo(0, document.getElementById("my_own_application_header").offsetHeight)
+</script>

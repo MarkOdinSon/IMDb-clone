@@ -20,4 +20,84 @@ User.create!([{
                 password: 'super_admin112233',
                 role: 'super_admin'
               }])
-p "Created #{User.count} Users"
+puts "Created #{User.count} Users"
+
+Category.create!([{
+                    name: 'Action'
+                  },
+                  {
+                    name: 'Adventure'
+                  },
+                  {
+                    name: 'Animation'
+                  },
+                  {
+                    name: 'Biography'
+                  },
+                  {
+                    name: 'Comedy'
+                  },
+                  {
+                    name: 'Crime'
+                  },
+                  {
+                    name: 'Documentary'
+                  },
+                  {
+                    name: 'Drama'
+                  },
+                  {
+                    name: 'Family'
+                  },
+                  {
+                    name: 'Fantasy'
+                  },
+                  {
+                    name: 'FilmNoir'
+                  },
+                  {
+                    name: 'GameShow'
+                  },
+                  {
+                    name: 'History'
+                  },
+                  {
+                    name: 'Horror'
+                  },
+                  {
+                    name: 'Music'
+                  },
+                  {
+                    name: 'Musical'
+                  },
+                  {
+                    name: 'Mystery'
+                  },
+                  {
+                    name: 'News'
+                  },
+                  {
+                    name: 'RealityTV'
+                  },
+                  {
+                    name: 'Romance'
+                  },
+                  {
+                    name: 'SciFi'
+                  },
+                  {
+                    name: 'Sport'
+                  },
+                  {
+                    name: 'TalkShow'
+                  },
+                  {
+                    name: 'Thriller'
+                  },
+                  {
+                    name: 'War'
+                  },
+                  {
+                    name: 'Western'
+                  }])
+puts "Created #{Category.count} Categories"

@@ -1,0 +1,160 @@
+<% if type == 'already_rated' %>
+
+  <div id="<%= name %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div class="relative w-full h-full max-w-md md:h-auto">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="<%= name %>">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="p-6 text-center">
+
+          <div class="flex justify-center">
+            <div class="my-2 ">
+              <% if movie.image.attached? %>
+                <%= image_tag movie.image, width: '140px', height: '186px' %>
+              <% end %>
+            </div>
+
+            <!--From here fetch with js help finds out what grade to send to the server-->
+            <div class=" flex items-center">
+              <div id="field_with_grade_<%= movie.id %>" class="star ml-2 text-xl font-medium text-gray-500 dark:text-gray-400 my-5"><%= current_user_grade %></div>
+            </div>
+          </div>
+
+          <div class="font-bold text-lg truncate text-ellipsis"><%= movie.title %></div>
+          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+
+          <%= render partial: 'movies/rating_star_bar', locals: {  movie: movie, type: type, current_user_grade: current_user_grade } %>
+
+          </h3>
+          <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_updateRatingFetch()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+            Rate
+          </button>
+          <button data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_deleteRatingFetch()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+            Remove rating
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+      function for_movie_<%= movie.id %>_updateRatingFetch() {
+          fetch('/ratings/update', {
+              method: 'PATCH',
+              headers: {
+                  'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+                  'Content-type': 'application/json; charset=UTF-8'
+              },
+              body: JSON.stringify({
+                  <!--sample-->
+                  movie_id: <%= movie.id %>,
+                  user_id: <%= current_user.id %>,
+                  grade: document.getElementById("field_with_grade_<%= movie.id %>").innerHTML
+              })
+          }).then (response => response.text())
+              .then(html => Turbo.renderStreamMessage(html));
+      }
+
+      function for_movie_<%= movie.id %>_deleteRatingFetch() {
+          fetch('/ratings/destroy', {
+              method: 'DELETE',
+              headers: {
+                  'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+                  'Content-type': 'application/json; charset=UTF-8'
+              },
+              body: JSON.stringify({
+                  <!--sample-->
+                  movie_id: <%= movie.id %>,
+                  user_id: <%= current_user.id %>,
+              })
+          }).then (response => response.text())
+              .then(html => Turbo.renderStreamMessage(html));
+      }
+  </script>
+
+<% else %>
+
+  <div id="<%= name %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+    <div class="relative w-full h-full max-w-md md:h-auto">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-hide="<%= name %>">
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="p-6 text-center">
+
+          <div class="flex justify-center">
+            <div class="my-2 ">
+              <% if movie.image.attached? %>
+                <%= image_tag movie.image, width: '140px', height: '186px' %>
+              <% end %>
+            </div>
+
+            <!--From here fetch with js help finds out what grade to send to the server-->
+            <div class=" flex items-center">
+              <div id="field_with_grade_<%= movie.id %>" class="star ml-2 text-xl font-medium text-gray-500 dark:text-gray-400 my-5">?</div>
+            </div>
+          </div>
+
+          <div class="font-bold text-lg truncate text-ellipsis"><%= movie.title %></div>
+          <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+
+          <%= render partial: 'movies/rating_star_bar', locals: {  movie: movie, type: type } %>
+
+          </h3>
+          <button id="<%= name %>" data-modal-hide="<%= name %>" onclick="for_movie_<%= movie.id %>_createRatingFetch()" type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">
+            Rate
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+      function for_movie_<%= movie.id %>_createRatingFetch() {
+          fetch('/ratings/create', {
+              method: 'POST',
+              headers: {
+                  'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+                  'Content-type': 'application/json; charset=UTF-8'
+              },
+              body: JSON.stringify({
+                  <!--sample-->
+                  movie_id: <%= movie.id %>,
+                  user_id: <%= current_user.id %>,
+                  grade: document.getElementById("field_with_grade_<%= movie.id %>").innerHTML
+              })
+          }).then (response => response.text())
+              .then(html => Turbo.renderStreamMessage(html));
+      }
+  </script>
+
+<% end %>
+
+<!--Draw star with selected grade-->
+<style type="text/css">
+    .star {
+        height: 100px;
+        width: 100px;
+        -webkit-clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        text-align: center;
+        background: blueviolet;
+        color: white;
+    }
+
+    .star::before {
+        display: inline-block;
+        height: 100%;
+        background: blue;
+        vertical-align: middle;
+        content: '';
+    }
+</style>
+
+<!--
+Our csrf-token we can get at the head of our view
+(rails generate token automatically and return it in the head of each page see file: (layout/application)
+-->

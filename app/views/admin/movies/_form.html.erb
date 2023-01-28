@@ -1,0 +1,68 @@
+<%= form_with(model: movie, url: this_url) do |form| %>
+  <% if movie.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+      <ul>
+        <% movie.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :category_ids, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <!--https://slimselectjs.com/install#cdn-->
+    <%= form.select :category_ids, Category.pluck(:name, :id), {}, {multiple: true, id: 'selectCategoriesForm', class: 'text-lg', required: true} %>
+    <p class="text-gray-500"><i>at least one category must be selected</i></p>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :title, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.text_field :title, required: true, class: "bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+  </div>
+
+  <div class="my-5">
+    <% if movie.image.attached? %>
+      <%= image_tag movie.image, width: "256px", id: "output_image" %>
+    <% else %>
+      <img id="output_image" width="256px" alt="Image not selected">
+    <% end %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :image, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.file_field :image, accept: "image/*", onchange: "loadFileImg(event)" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :text, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" %>
+    <%= form.rich_text_area :text %>
+  </div>
+
+  <p class="text-gray-500"><i>(if nothing happens after clicking the button make sure you have selected at least one category)</i></p>
+
+  <div class="my-5">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
+
+<%= stylesheet_link_tag 'multi-selects/multi-select-tag' %>
+<%= javascript_include_tag 'multi-selects/multi-select-tag' %>
+
+<script type="text/javascript">
+    new MultiSelectTag('selectCategoriesForm')
+</script>
+
+<script type="text/javascript">
+    //https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+
+    let loadFileImg = function(event) {
+        let output = document.getElementById('output_image');
+        console.log(output)
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
