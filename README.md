@@ -1,13 +1,10 @@
-#My IMDb clone pet-app Rails + Docker
+# My IMDb clone pet-app Rails + Docker
 Mark Hladkov - 2023 year
-<hr>
-
-## Here main img of the site
-<br>
-
+<br><br>
+![Log in page](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/log_in.png)
+<br><br>
 ![Index (main) page](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/index_1.png)
 
-<hr>
 ## Running this app on your local machine
 
 Run the following algorithm to deploy this project on your local machine <br><br>
@@ -183,3 +180,32 @@ In order to demonstrate my knowledge of web application development. <br><br>
 Such as: server-side (databases + SQL (ORM) DDL & DML, business logic, API, authorization, unit testing and other debugging tools, Docker, Git)
 and front-end JavaScript, AJAX or fetch, Tailwind CSS, dynamic pages without reloading (turbo frames), 
 WYSIWYG Trix editor to create and edit posts with attachments, responsive page layout (HTML Responsive Web Design), page paganation, seach by title or selected categories and etc.)
+
+<hr>
+
+## Gallery of photos
+
+![Edit page sample 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/edit_1.png)
+<br><br>
+![Edit page sample 2](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/edit_2.png)
+<br><br>
+![Index (main) page on phone](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/index_2.png)
+<br><br>
+![Movie post adding sample 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/index_2.png](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/new_1.png)
+<br><br>
+![Movie post adding sample 2](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/new_2.png)
+<br><br>
+![Page pagination sample 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/pagination_1.png)
+<br><br>
+![Page pagination sample 2](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/pagination_2.png)
+<br><br>
+![Rating modal sample 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/rating_1.png)
+<br><br>
+![Rating modal sample 2](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/rating_2.png)
+<br><br>
+![Search on site](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/search_1.png)
+<br><br>
+![Movie details page 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/show_movie_1.png)
+<br><br>
+![Movie details page 2](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/show_movie_2.png)
+<br><br>
