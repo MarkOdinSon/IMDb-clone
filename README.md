@@ -16,10 +16,18 @@ Installation algorithm (steps): <br>
 5. go to http://localhost:8000/ <br>
    Enjoy!
 <br>
-(now not necessary anymore, command #4 do it automatically) <br>
+(following commands not necessary anymore, command #4 do it automatically) <br>
 `./run rails db:setup` (input in database some users and categories by default) file: db/seeds.rb <br>
+`./run rails db:migrate`
 `./run rails db:seed` <br>
 `./run bundle:install` <br>
+<hr>
+
+To be sure that the database and Rails components are working correctly, run the following commands:
+
+`./run rails db:seed RAILS_ENV=test --trace` it must return: `Created 3 Users; Created 26 Categories` <br>
+`docker-compose run -e "RAILS_ENV=test" web bundle exec rspec` it must return: `36 examples, 0 failures, 3 pending` <br>
+
 <hr>
 
 ## General information
