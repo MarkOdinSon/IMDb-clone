@@ -1,6 +1,6 @@
 /*
- * Your custom CSS goes here but before adding a lot of CSS check this out:
- *   https://tailwindcss.com/docs/extracting-components
+    *= require_self
+    *= require_tree
 */
 
 @import 'actiontext.css';
@@ -9,6 +9,3 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-*= require slimselect
-*= require multi-select-tag
