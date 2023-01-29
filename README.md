@@ -191,7 +191,7 @@ WYSIWYG Trix editor to create and edit posts with attachments, responsive page l
 <br><br>
 ![Index (main) page on phone](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/index_2.png)
 <br><br>
-![Movie post adding sample 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/index_2.png](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/new_1.png)
+![Movie post adding sample 1](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/new_1.png)
 <br><br>
 ![Movie post adding sample 2](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/new_2.png)
 <br><br>
