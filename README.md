@@ -5,6 +5,8 @@ Mark Hladkov - 2023 year
 ## Here main img of the site
 <br>
 
+![Index (main) page](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/index_1.png)
+
 <hr>
 ## Running this app on your local machine
 
