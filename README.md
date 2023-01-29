@@ -173,6 +173,7 @@ GitHub Actions have been set up.
 
 ## About the author
 
+- Template origin: Nick Janetakis | https://nickjanetakis.com | @nickjanetakis [https://github.com/nickjj/docker-rails-example]
 - Mark Hladkov (web developer) | [Telegram](https://t.me/MarkOdinSon)
 
 Developed this project as my Rails pet-project with Docker. <br><br>
