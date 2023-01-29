@@ -30,7 +30,6 @@ yarn-debug.log*
 docker-compose.override.yml
 
 # Added by me
-.idea/navigate_app.iml
 
 .idea/*
 
