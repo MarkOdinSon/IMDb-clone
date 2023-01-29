@@ -13,12 +13,13 @@ Installation algorithm (steps): <br>
 2. `cd AppIMBbClone` <br>
 3. `cp .env.example .env` <br>
 4. `docker-compose up --build` <br>
-5. `./run rails db:setup` (input in database some users and categories by default) file: db/seeds.rb <br>
-6. `./run rails db:seed`
-7. go to http://localhost:8000/ <br>
+5. go to http://localhost:8000/ <br>
    Enjoy!
-<hr>
-./run bundle:install (now not necessary anymore, command #4 do it automatically) <br>
+<br>
+(now not necessary anymore, command #4 do it automatically) <br>
+`./run rails db:setup` (input in database some users and categories by default) file: db/seeds.rb <br>
+`./run rails db:seed` <br>
+`./run bundle:install` <br>
 <hr>
 
 ## General information
