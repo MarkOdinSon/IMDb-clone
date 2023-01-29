@@ -64,9 +64,28 @@ RSpec.describe Rating, type: :model do
     end
   end
 
+  context 'scope(methods) tests' do
+    it 'class Rating should have method to return_grade_by_movie_id_and_by_user_id' do
+      movie = Movie.create(title: 'Some text', text: 'Some text')
+
+      # standard users from db/seed
+      user1_id = User.where(email: 'user@mail.com').first.id
+      user2_id = User.where(email: 'admin@mail.com').first.id
+
+      r = Rating.create(user_id: user1_id, movie_id: movie.id, grade: 8)
+
+      expect(Rating.return_grade_by_movie_id_and_by_user_id(user1_id, movie.id)).to eq(8)
+      expect(Rating.return_grade_by_movie_id_and_by_user_id(user2_id, movie.id)).to eq('Not exists')
+      r.delete; movie.delete
+    end
+  end
+
   context 'relation (relationships with other tables)' do
-    it 'ratings should belong to many movies and users' do
+    it 'ratings should belong to one user' do
       should belong_to :user
+    end
+
+    it 'ratings should belong to one movie' do
       should belong_to :movie
     end
   end
