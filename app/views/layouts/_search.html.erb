@@ -27,6 +27,10 @@
         <%= form.submit "Search", class: "pl-2 rounded-r-lg border-l-gray-50 py-2 px-3 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
         &nbsp&nbsp&nbsp&nbsp&nbsp
       </div>
+
+      <div class="flex my-2">
+        <%= link_to "By popularity", "/movies/sort_movies_by_popularity", class: 'text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2' %>
+      </div>
     </div>
   <% end %>
 

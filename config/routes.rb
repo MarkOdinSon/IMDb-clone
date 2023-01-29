@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     collection do
       get :show
       get :show_rated_by_user
+      get :sort_movies_by_popularity
       post :set_search_option
     end
   end

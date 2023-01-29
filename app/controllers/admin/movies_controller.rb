@@ -68,13 +68,13 @@ class Admin::MoviesController < ApplicationController
 
     # finally we can delete the movie post from our data base
     begin
-      @movie.delete
-    rescue ActiveRecordError::RecordNotFound
-      flash[:alert] = 'Something went wrong! Movie with this id not found! :('
+      @movie.destroy
+
+      redirect_to root_path, flash: { alert: 'Movie post has been successfully deleted!' }
+    rescue
+      flash[:alert] = 'Something went wrong! We cannot delete this movie post :('
       redirect_to(request.referrer || root_path)
     end
-
-    redirect_to root_path, flash: { alert: 'Movie post has been successfully deleted!' }
   end
 
   private

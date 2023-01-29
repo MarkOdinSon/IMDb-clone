@@ -42,6 +42,11 @@ class MoviesController < ApplicationController
     end
   end
 
+  def sort_movies_by_popularity
+    @movies = Movie.all.order(rating: :desc).page(params[:page])
+    render 'movies/index'
+  end
+
   def set_search_option
     string_with_array_of_categories = Category.where(id: params[:category_ids]).map(&:name).join(', ').delete(' ')
 

@@ -29,6 +29,26 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'scope(methods) tests' do
+    it 'class User should have method user_rated_this_movie?' do
+      # standard users from db/seed
+      user1_id = User.where(email: 'user@mail.com').first.id
+
+      movie = Movie.create(title: 'Some text', text: 'Some text')
+      movie2 = Movie.create(title: 'Some text2', text: 'Some text2')
+      movie3 = Movie.create(title: 'Some text3', text: 'Some text3')
+
+      r = Rating.create(user_id: user1_id, movie_id: movie.id, grade: 9)
+      r2 = Rating.create(user_id: user1_id, movie_id: movie2.id, grade: 9)
+
+      expect(User.user_rated_this_movie?(user1_id, movie.id)).to eq(true)
+      expect(User.user_rated_this_movie?(user1_id, movie2.id)).to eq(true)
+      expect(User.user_rated_this_movie?(user1_id, movie3.id)).to eq(false)
+
+      r.delete; r2.delete; movie.delete; movie2.delete; movie3.delete
+    end
+  end
+
   context 'relation (relationships with other tables)' do
     it 'user should have many ratings' do
       should have_many :ratings

@@ -27,7 +27,7 @@ RSpec.describe Movie, type: :model do
     end
   end
 
-  context 'scope tests' do
+  context 'scope(methods) tests' do
     before(:each) do
       3.times { Movie.create(title: 'Some text', text: 'Some text', rating: 0) }
       Movie.create(title: 'Some text', text: 'Some text', rating: 5)
@@ -45,6 +45,24 @@ RSpec.describe Movie, type: :model do
     it 'should be able to search movies by title' do
       expect(Movie.search_movies_by_title('some title').class.to_s).to eq('Movie::ActiveRecord_Relation')
     end
+
+    it 'should be able to search movies by categories' do
+      movie = Movie.create(title: 'Some text', text: 'Some text')
+      movie2 = Movie.create(title: 'Some text2', text: 'Some text2')
+
+      # Fantasy: 10,
+      # Romance: 20,
+
+      mc1 = MovieCategory.create(movie_id: movie.id, category_id: 10)
+      mc2 = MovieCategory.create(movie_id: movie.id, category_id: 20)
+
+      mc3 = MovieCategory.create(movie_id: movie2.id, category_id: 10)
+
+      expect(Movie.search_movies_by_categories('Fantasy').ids).to eq([movie2.id, movie.id])
+      expect(Movie.search_movies_by_categories('Romance').first.id).to eq(movie.id)
+
+      mc1.delete; mc2.delete; mc3.delete; movie.delete; movie2.delete;
+    end
   end
 
   context 'relation (relationships with other tables)' do
@@ -54,6 +72,14 @@ RSpec.describe Movie, type: :model do
 
     it 'movie should have many movie categories' do
       should have_many :movie_categories
+    end
+
+    it 'movie should have one attached associations to image (ActiveRecord, ActiveStorage)' do
+      should have_one_attached :image
+    end
+
+    it 'movie should have one attached associations to image (ActionText trix editor)' do
+      should have_rich_text :text
     end
   end
 end
