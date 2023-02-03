@@ -1,4 +1,4 @@
-# My IMDb clone pet-app Rails + Docker
+# IMDb clone pet-app Rails & Docker
 Mark Hladkov - 2023 year
 <br><br>
 ![Log in page](https://github.com/MarkOdinSon/IMDb-clone/blob/main/img_for_readme/log_in.png)
@@ -25,8 +25,10 @@ Installation algorithm (steps): <br>
 
 To be sure that the database and Rails components are working correctly, run the following commands:
 
-`./run rails db:seed RAILS_ENV=test --trace` it must return: `Created 3 Users; Created 26 Categories` <br>
-`docker-compose run -e "RAILS_ENV=test" web bundle exec rspec` it must return: `36 examples, 0 failures, 3 pending` <br>
+`./run rails db:seed RAILS_ENV=test --trace` <br>
+it must return: `Created 3 Users; Created 26 Categories` <br>
+`docker-compose run -e "RAILS_ENV=test" web bundle exec rspec` <br>
+it must return: `36 examples, 0 failures, 3 pending` <br>
 
 <hr>
 
